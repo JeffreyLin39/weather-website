@@ -7,4 +7,8 @@ export const Container = styled.div`
 	height: 100vh;
 	overflow: hidden;
 	background-color: black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
 `;
