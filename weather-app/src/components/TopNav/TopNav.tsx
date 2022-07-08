@@ -3,34 +3,49 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 import { SearchBar, Button, Wrapper } from "./TopNav.styles";
+
 const TopNav = () => {
 	const [value, setValue] = React.useState<string>("");
+
 	const handleSearchBar = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setValue(e.target.value);
 	};
+
+	const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+		if (e.key === "Enter") {
+			handleAPISearch();
+		}
+	};
+
 	const handleAPISearch = () => {
 		fetch(
-			"http://api.weatherapi.com/v1/current.json?" +
+			"https://api.weatherapi.com/v1/current.json?" +
 				new URLSearchParams({
 					key: process.env.REACT_APP_API_KEY ?? "",
 					q: value,
 				})
 		)
 			.then((response) => response.json())
-			.then((response) => console.log(response));
+			.catch((error) => console.error(error))
+			.then((response) => console.log(JSON.stringify(response)))
+			.catch((error) => console.error(error));
 	};
+
 	return (
-		<Wrapper>
-			<SearchBar
-				type={"text"}
-				value={value}
-				onChange={handleSearchBar}
-				placeholder={"Search a location..."}
-			/>
-			<Button onClick={handleAPISearch}>
-				<FontAwesomeIcon icon={faArrowRight} />
-			</Button>
-		</Wrapper>
+		<>
+			<Wrapper>
+				<SearchBar
+					type={"text"}
+					value={value}
+					onChange={handleSearchBar}
+					onKeyDown={handleKeyDown}
+					placeholder={"Search a location..."}
+				/>
+				<Button onClick={handleAPISearch}>
+					<FontAwesomeIcon icon={faArrowRight} />
+				</Button>
+			</Wrapper>
+		</>
 	);
 };
 
