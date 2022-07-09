@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const SearchBar = styled.input`
 	margin: 3rem;
 	width: 30%;
-	height: 5%;
+	height: 3.3rem;
 	border-radius: 50px;
 	padding: 5px 35px;
 	border: none;
@@ -31,5 +31,5 @@ export const Wrapper = styled.div`
 	display: flex;
 	justify-content: center;
 	width: 100%;
-	height: 100%;
+	height: 30%;
 `;

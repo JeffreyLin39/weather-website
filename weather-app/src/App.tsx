@@ -5,15 +5,16 @@ import "./App.css";
 import TopNav from "./components/TopNav/TopNav";
 import Home from "./components/Home/Home";
 import Wrapper from "./components/Wrapper/Wrapper";
+import { WeatherProvider } from "./Store/Weather.provider";
 
 function App() {
 	return (
-		<React.Fragment>
+		<WeatherProvider>
 			<Wrapper>
 				<TopNav />
 				<Home />
 			</Wrapper>
-		</React.Fragment>
+		</WeatherProvider>
 	);
 }
 
