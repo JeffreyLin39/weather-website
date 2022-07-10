@@ -13,7 +13,7 @@ export const temperatureSlice = createSlice({
 	name: "temperature",
 	initialState,
 	reducers: {
-		update: (state, action: PayloadAction<number>) => {
+		update: (state, action: PayloadAction<number | undefined>) => {
 			state.value = action.payload;
 		},
 	},
