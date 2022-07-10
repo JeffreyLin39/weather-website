@@ -38,10 +38,9 @@ const TopNav = () => {
 			const queries: string[] = [...storage];
 			if (storage.length > 4) {
 				queries.pop();
-				setStorage(storage.slice(-1));
 			}
 			queries.unshift(value);
-			setStorage([value, ...storage]);
+			setStorage(queries);
 			sessionStorage.setItem("queries", queries.join("~"));
 		}
 	};
@@ -62,6 +61,7 @@ const TopNav = () => {
 				} else {
 					updateSessionStorage();
 					dispatch(update(response.current.temp_c));
+					setValue("");
 				}
 			})
 			.catch((error) => console.error(error));
@@ -79,7 +79,9 @@ const TopNav = () => {
 					onFocus={() => setFocused(true)}
 					onBlur={() => setTimeout(() => setFocused(false), 200)}
 				/>
-				{sessionStorage.length > 0 && focused && <HistoryViewer />}
+				{sessionStorage.length > 0 && focused && (
+					<HistoryViewer queries={storage} />
+				)}
 				<Button onClick={handleAPISearch}>
 					<FontAwesomeIcon icon={faArrowRight} />
 				</Button>

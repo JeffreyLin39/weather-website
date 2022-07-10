@@ -4,7 +4,11 @@ import { update } from "../../Store/Weather.reducer";
 
 import { Wrapper, Table, TableRow, TableData } from "./HistoryViewer.styles";
 
-const HistoryViewer = () => {
+interface IHistoryViewerProps {
+	queries: string[];
+}
+
+const HistoryViewer: React.FunctionComponent<IHistoryViewerProps> = (props) => {
 	// Store
 	const dispatch = useDispatch();
 
@@ -24,13 +28,11 @@ const HistoryViewer = () => {
 			.catch((error) => console.error(error));
 	};
 
-	const queries: string[] =
-		sessionStorage?.getItem("queries")?.split("~") ?? [];
 	return (
 		<Wrapper>
 			<Table>
-				{queries.length > 0 &&
-					queries.map((query, index) => (
+				{props.queries.length > 0 &&
+					props.queries.map((query, index) => (
 						<TableRow key={index} onClick={() => handleAPISearch(query)}>
 							<TableData>{query}</TableData>
 						</TableRow>
